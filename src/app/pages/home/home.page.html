@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Form register Home</ion-title>
+  </ion-toolbar>
+
+<ion-list>
+  <ion-item>
+    <ion-input  [(ngModel)]="username" label="name:" placeholder="Enter text" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input  type="password"  [(ngModel)]="password" label="password:" placeholder="Enter text"></ion-input>
+  </ion-item>
+
+  <ion-button type="submit"(click)="gotonext()" color="success" expand="block"
+  >Submit</ion-button>
+</ion-list></ion-header>  
+
