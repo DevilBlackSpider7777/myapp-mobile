@@ -1,5 +1,5 @@
 import {homedbCRUD , CustomerData} from './homedb_CRUD.service'
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { ChangeDetectorRef,Component, OnInit } from '@angular/core';
 import { create } from 'domain';
 
@@ -24,17 +24,17 @@ export class HomedbPage implements OnInit {
   }
 async adddata(){
   const alert = await this.alertCtrl.create({
-    header: 'Create',
-    subHeader: 'Fill the form',
+    header: 'ADD',
+    subHeader: 'to name and price',
     inputs: [
       {
-        name: 'intelno',
+        name: 'name',
         type: 'text',
         placeholder: 'name'
       },
       {
-        name: 'intelno',
-        type: 'text',
+        name: 'price',
+        type: 'number',
         placeholder: 'price'
       }
     ],
@@ -47,11 +47,11 @@ async adddata(){
         }
       },
       {
-        text : 'create',
+        text : 'adddara',
         handler: (data) => {
          const CustomerData : CustomerData = {
-         fullname: data.inpname,
-         price: data.inprice,
+         fullname: data.name,
+         price: data.price,
         }
         this.dataService.createData(CustomerData); 
       }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { collection, collectionData, Firestore} from'@angular/fire/firestore';
+import { addDoc, collection, collectionData, Firestore} from'@angular/fire/firestore';
 import { Observable, map } from 'rxjs';
 
 export interface CustomerData {
@@ -21,7 +21,15 @@ private _DB : any;
 constructor(private firestore: Firestore) { }
 
 loadAllData(): Observable<CustomerData[]> {
-const notesRef = collection(this.firestore, 'StudentCollection');
-return collectionData(notesRef, { idField: 'id'}) as Observable<CustomerData[]>;
+    const notesRef = collection(this.firestore, 'StudentCollection');
+    return collectionData(notesRef, { idField: 'id'}) as Observable<CustomerData[]>;
+}
+createData(tmpObj: CustomerData) {
+    const notesRef = collection(this.firestore, 'StudentCollection');
+        
+   return addDoc(notesRef, {       
+        fullname: tmpObj.fullname,
+        price: tmpObj.price,
+   });
 }
 }
