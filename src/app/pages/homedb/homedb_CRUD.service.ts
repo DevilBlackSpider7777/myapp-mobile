@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, Firestore} from'@angular/fire/firestore';
+import { addDoc, collection, collectionData, deleteDoc, doc, Firestore, setDoc, updateDoc} from'@angular/fire/firestore';
 import { Observable, map } from 'rxjs';
 
 export interface CustomerData {
@@ -16,6 +16,14 @@ providedIn: 'root'
 })
 
 export class homedbCRUD {
+deleteData(customer: CustomerData) {
+  const notesRef=doc(this.firestore,'StudentCollection/'+customer.id);
+  return deleteDoc(notesRef)
+}
+editData(customerEdit: CustomerData) {
+    const notesRef=doc(this.firestore,'StudentCollection/'+customerEdit.id);
+    return setDoc(notesRef,{fullname:customerEdit.fullname,price:customerEdit.price});
+}
 
 private _DB : any;
 constructor(private firestore: Firestore) { }

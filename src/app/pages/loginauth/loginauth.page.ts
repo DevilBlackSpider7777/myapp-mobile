@@ -49,9 +49,23 @@ async showAlert(header:string, message:string) {
     header,
     message,
     buttons: ['OK']
+
 });
- 
+ await alert.present();
 
 
 }
+async register() {
+  const loading = await this.loadingController.create();
+  await loading.present();
+  
+  const user = await this.authSV.register(this.email2,this.pwd2);
+  await loading.dismiss();
+  
+  if (user) {
+  this.router.navigateByUrl('/home', { replaceUrl: true });
+  } else {
+  this.showAlert('Registration failed', 'Please try again!');
+  }
+  }
 }
