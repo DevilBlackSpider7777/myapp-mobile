@@ -47,7 +47,7 @@ async adddata(){
         }
       },
       {
-        text : 'adddara',
+        text : 'adddata',
         handler: (data) => {
          const CustomerData : CustomerData = {
          fullname: data.name,
