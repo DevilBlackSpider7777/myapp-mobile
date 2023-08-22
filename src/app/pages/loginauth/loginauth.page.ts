@@ -55,17 +55,45 @@ async showAlert(header:string, message:string) {
 
 
 }
-async register() {
-  const loading = await this.loadingController.create();
-  await loading.present();
-  
-  const user = await this.authSV.register(this.email2,this.pwd2);
-  await loading.dismiss();
-  
-  if (user) {
-  this.router.navigateByUrl('/home', { replaceUrl: true });
-  } else {
-  this.showAlert('Registration failed', 'Please try again!');
-  }
-  }
+
+async Register() {
+const alert = await this.alertController.create({
+  header: 'Register',
+  inputs: [
+    {
+      name: 'email',
+      placeholder: 'Email',
+      type: 'email',
+    },
+    {
+      name: 'password',
+      placeholder: 'Password',
+      type: 'text',
+    }
+  ],
+  buttons: [
+    {
+      text: 'Cancel',
+      role: 'cancel'
+    },
+    {
+      text: 'Register',
+      handler: async (res) => {
+        const loading = await this.loadingController.create();
+        await loading.present();
+
+        const user = await this.authSV.register(res.email, res.password);
+        await loading.dismiss();
+
+        if (user) {
+          this.router.navigateByUrl('/home-db', { replaceUrl: true });
+        } else {
+          this.showAlert("Register Fail", "Please try again!")
+        }
+      }
+    }
+  ]
+});
+await alert.present();
+}
 }

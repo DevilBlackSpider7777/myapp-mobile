@@ -1,7 +1,9 @@
 import {homedbCRUD , CustomerData} from './homedb_CRUD.service'
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController,LoadingController } from '@ionic/angular';
 import { ChangeDetectorRef,Component, OnInit } from '@angular/core';
-import { create } from 'domain';
+//import { create } from 'domain';
+import { AuthService } from '../loginauth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homedb',
@@ -14,6 +16,9 @@ export class HomedbPage implements OnInit {
   constructor(private dataService: homedbCRUD,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
+    private authService: AuthService,
+    private router: Router, 
     private cd: ChangeDetectorRef) {
     this.dataService.loadAllData().subscribe(res => {
     this.datalist = res;
@@ -123,6 +128,13 @@ async EditData(customerEditData: CustomerData){
   ]
   });
   (await alert).present();
+}
+async Logout() {
+  const loading = await this.loadingCtrl.create();
+  await loading.present();
+  this.authService.logout();
+  await loading.dismiss();
+  this.router.navigateByUrl("/loginauth", { replaceUrl: true })
 }
 
 

@@ -10,7 +10,7 @@ export class AppComponent {
     { title: 'About', url: 'about', icon: 'add' },
     { title: 'Contact', url: 'contact', icon: 'paper-plane' },
     { title: 'Homedb', url: 'homedb', icon: 'ellipsis-horizontal' },
-    { title: 'Login', url: 'loginauth', icon: 'add' },
+    { title: 'Login', url: 'loginauth', icon: 'home' },
     
   ];
 
